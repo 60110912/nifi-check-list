@@ -32,39 +32,38 @@ def allProcessorValidName(jsonobj):
         else:
             print("Record #{}: ERROR\n".format(item['name']))
 
-
-#if __name__ == "__main__":
 # Преобразовать строку формата json в объект python
-    # with open('outlook_exchange.json') as json_file:
-    #     data=json_file.read()
-    # jsonobj = json.loads(data)
-    # allProcessorsIsEnables(jsonobj)
-    # allProcessorValidName(jsonobj)
+if __name__ == "__main__":
+    with open('outlook_exchange.json') as json_file:
+        data=json_file.read()
+    jsonobj = json.loads(data)
+    allProcessorsIsEnables(jsonobj)
+    allProcessorValidName(jsonobj)
 
 #Тест
-with open('unit_test/org.apache.nifi.processors.standard.PutSQL.json') as json_file:
-    data=json_file.read()
-jsonobj = json.loads(data)
+# with open('unit_test/org.apache.nifi.processors.standard.PutSQL.json') as json_file:
+#     data=json_file.read()
+# jsonobj = json.loads(data)
 
-schema = {
-   "type": "object",
-        "properties" : {
-            "scheduledState":{"type": "string", "enum": ["ENABLED"]},
-            "properties":{
-                "type" :"object",
-                "properties" : {
-                    "JDBC Connection Pool":{"type": "string", 
-                            "pattern": '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
-                            "minLength": 36,
-                            "maxLength": 36}
-                },
-                "required": ["JDBC Connection Pool"]
-            },
-        },
-        "required": ["scheduledState"] 
-}
+# schema = {
+#    "type": "object",
+#         "properties" : {
+#             "scheduledState":{"type": "string", "enum": ["ENABLED"]},
+#             "properties":{
+#                 "type" :"object",
+#                 "properties" : {
+#                     "JDBC Connection Pool":{"type": "string", 
+#                             "pattern": '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+#                             "minLength": 36,
+#                             "maxLength": 36}
+#                 },
+#                 "required": ["JDBC Connection Pool"]
+#             },
+#         },
+#         "required": ["scheduledState"] 
+# }
 
-v = Draft201909Validator(schema)
-validate(jsonobj, schema)
+# v = Draft201909Validator(schema)
+# validate(jsonobj, schema)
 
 
