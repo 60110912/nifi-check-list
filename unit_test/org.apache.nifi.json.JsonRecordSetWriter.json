@@ -1,0 +1,139 @@
+{
+    "identifier": "4778711b-5c2d-36c7-823b-0e86302a100c",
+    "name": "JsonRecordSetWriter",
+    "comments": "",
+    "type": "org.apache.nifi.json.JsonRecordSetWriter",
+    "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-record-serialization-services-nar",
+        "version": "1.11.4"
+    },
+    "controllerServiceApis": [
+        {
+            "type": "org.apache.nifi.serialization.RecordSetWriterFactory",
+            "bundle": {
+                "group": "org.apache.nifi",
+                "artifact": "nifi-standard-services-api-nar",
+                "version": "1.11.4"
+            }
+        }
+    ],
+    "properties": {
+        "schema-branch": null,
+        "compression-level": "1",
+        "schema-cache": null,
+        "Timestamp Format": "yyyy-MM-dd HH:mm:ss.SSS",
+        "Date Format": "yyyy-MM-dd HH:mm:ss.SSS",
+        "Pretty Print JSON": "false",
+        "compression-format": "none",
+        "Schema Write Strategy": "no-schema",
+        "suppress-nulls": "never-suppress",
+        "output-grouping": "output-array",
+        "schema-name": "${schema.name}",
+        "schema-registry": null,
+        "Time Format": null,
+        "schema-access-strategy": "inherit-record-schema",
+        "schema-version": null,
+        "schema-text": "${avro.schema}"
+    },
+    "propertyDescriptors": {
+        "schema-branch": {
+            "name": "schema-branch",
+            "displayName": "Schema Branch",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "compression-level": {
+            "name": "compression-level",
+            "displayName": "Compression Level",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "schema-cache": {
+            "name": "schema-cache",
+            "displayName": "Schema Cache",
+            "identifiesControllerService": true,
+            "sensitive": false
+        },
+        "Timestamp Format": {
+            "name": "Timestamp Format",
+            "displayName": "Timestamp Format",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Date Format": {
+            "name": "Date Format",
+            "displayName": "Date Format",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Pretty Print JSON": {
+            "name": "Pretty Print JSON",
+            "displayName": "Pretty Print JSON",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "compression-format": {
+            "name": "compression-format",
+            "displayName": "Compression Format",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Schema Write Strategy": {
+            "name": "Schema Write Strategy",
+            "displayName": "Schema Write Strategy",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "suppress-nulls": {
+            "name": "suppress-nulls",
+            "displayName": "Suppress Null Values",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "output-grouping": {
+            "name": "output-grouping",
+            "displayName": "Output Grouping",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "schema-name": {
+            "name": "schema-name",
+            "displayName": "Schema Name",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "schema-registry": {
+            "name": "schema-registry",
+            "displayName": "Schema Registry",
+            "identifiesControllerService": true,
+            "sensitive": false
+        },
+        "Time Format": {
+            "name": "Time Format",
+            "displayName": "Time Format",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "schema-access-strategy": {
+            "name": "schema-access-strategy",
+            "displayName": "Schema Access Strategy",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "schema-version": {
+            "name": "schema-version",
+            "displayName": "Schema Version",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "schema-text": {
+            "name": "schema-text",
+            "displayName": "Schema Text",
+            "identifiesControllerService": false,
+            "sensitive": false
+        }
+    },
+    "componentType": "CONTROLLER_SERVICE",
+    "groupIdentifier": "353b0942-cf7e-3037-a927-b47749dcad15"
+}

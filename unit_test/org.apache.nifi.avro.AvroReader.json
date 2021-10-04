@@ -1,0 +1,76 @@
+{
+    "identifier": "2c6a2907-d2ff-39eb-834a-ab8001078f22",
+    "name": "AvroReader_EmbeddedSchema",
+    "comments": "",
+    "type": "org.apache.nifi.avro.AvroReader",
+    "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-record-serialization-services-nar",
+        "version": "1.11.4"
+    },
+    "controllerServiceApis": [
+        {
+            "type": "org.apache.nifi.serialization.RecordReaderFactory",
+            "bundle": {
+                "group": "org.apache.nifi",
+                "artifact": "nifi-standard-services-api-nar",
+                "version": "1.11.4"
+            }
+        }
+    ],
+    "properties": {
+        "schema-branch": null,
+        "schema-name": "${schema.name}",
+        "cache-size": "1000",
+        "schema-registry": null,
+        "schema-access-strategy": "embedded-avro-schema",
+        "schema-version": null,
+        "schema-text": "${avro.schema}"
+    },
+    "propertyDescriptors": {
+        "schema-branch": {
+            "name": "schema-branch",
+            "displayName": "Schema Branch",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "schema-name": {
+            "name": "schema-name",
+            "displayName": "Schema Name",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "cache-size": {
+            "name": "cache-size",
+            "displayName": "Cache Size",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "schema-registry": {
+            "name": "schema-registry",
+            "displayName": "Schema Registry",
+            "identifiesControllerService": true,
+            "sensitive": false
+        },
+        "schema-access-strategy": {
+            "name": "schema-access-strategy",
+            "displayName": "Schema Access Strategy",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "schema-version": {
+            "name": "schema-version",
+            "displayName": "Schema Version",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "schema-text": {
+            "name": "schema-text",
+            "displayName": "Schema Text",
+            "identifiesControllerService": false,
+            "sensitive": false
+        }
+    },
+    "componentType": "CONTROLLER_SERVICE",
+    "groupIdentifier": "353b0942-cf7e-3037-a927-b47749dcad15"
+}

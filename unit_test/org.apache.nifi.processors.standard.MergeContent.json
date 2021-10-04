@@ -1,0 +1,161 @@
+{
+                "identifier": "a296ea64-3c4d-3f1a-830e-e72d7aff5352",
+                "name": "outlook_exchange_MergeContent",
+                "comments": "",
+                "position": {
+                    "x": 1824.9536045990847,
+                    "y": 672.5688089154664
+                },
+                "bundle": {
+                    "group": "org.apache.nifi",
+                    "artifact": "nifi-standard-nar",
+                    "version": "1.11.4"
+                },
+                "style": {},
+                "type": "org.apache.nifi.processors.standard.MergeContent",
+                "properties": {
+                    "Keep Path": "false",
+                    "Maximum Group Size": "30 MB",
+                    "Merge Strategy": "Bin-Packing Algorithm",
+                    "Attribute Strategy": "Keep Only Common Attributes",
+                    "Compression Level": "1",
+                    "Maximum Number of Entries": "25000",
+                    "Minimum Group Size": "0 B",
+                    "Maximum number of Bins": "200",
+                    "Tar Modified Time": "${file.lastModifiedTime}",
+                    "Delimiter Strategy": "Text",
+                    "Merge Format": "Binary Concatenation",
+                    "Footer File": "]",
+                    "Max Bin Age": "301 sec",
+                    "Demarcator File": ",",
+                    "Correlation Attribute Name": "table",
+                    "Header File": "[",
+                    "mergecontent-metadata-strategy": "Do Not Merge Uncommon Metadata",
+                    "Minimum Number of Entries": "5001"
+                },
+                "propertyDescriptors": {
+                    "Keep Path": {
+                        "name": "Keep Path",
+                        "displayName": "Keep Path",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Maximum Group Size": {
+                        "name": "Maximum Group Size",
+                        "displayName": "Maximum Group Size",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Merge Strategy": {
+                        "name": "Merge Strategy",
+                        "displayName": "Merge Strategy",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Attribute Strategy": {
+                        "name": "Attribute Strategy",
+                        "displayName": "Attribute Strategy",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Compression Level": {
+                        "name": "Compression Level",
+                        "displayName": "Compression Level",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Maximum Number of Entries": {
+                        "name": "Maximum Number of Entries",
+                        "displayName": "Maximum Number of Entries",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Minimum Group Size": {
+                        "name": "Minimum Group Size",
+                        "displayName": "Minimum Group Size",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Maximum number of Bins": {
+                        "name": "Maximum number of Bins",
+                        "displayName": "Maximum number of Bins",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Tar Modified Time": {
+                        "name": "Tar Modified Time",
+                        "displayName": "Tar Modified Time",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Delimiter Strategy": {
+                        "name": "Delimiter Strategy",
+                        "displayName": "Delimiter Strategy",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Merge Format": {
+                        "name": "Merge Format",
+                        "displayName": "Merge Format",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Footer File": {
+                        "name": "Footer File",
+                        "displayName": "Footer",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Max Bin Age": {
+                        "name": "Max Bin Age",
+                        "displayName": "Max Bin Age",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Demarcator File": {
+                        "name": "Demarcator File",
+                        "displayName": "Demarcator",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Correlation Attribute Name": {
+                        "name": "Correlation Attribute Name",
+                        "displayName": "Correlation Attribute Name",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Header File": {
+                        "name": "Header File",
+                        "displayName": "Header",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "mergecontent-metadata-strategy": {
+                        "name": "mergecontent-metadata-strategy",
+                        "displayName": "Metadata Strategy",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    },
+                    "Minimum Number of Entries": {
+                        "name": "Minimum Number of Entries",
+                        "displayName": "Minimum Number of Entries",
+                        "identifiesControllerService": false,
+                        "sensitive": false
+                    }
+                },
+                "schedulingPeriod": "0 sec",
+                "schedulingStrategy": "TIMER_DRIVEN",
+                "executionNode": "ALL",
+                "penaltyDuration": "30 sec",
+                "yieldDuration": "1 sec",
+                "bulletinLevel": "WARN",
+                "runDurationMillis": 0,
+                "concurrentlySchedulableTaskCount": 1,
+                "autoTerminatedRelationships": [
+                    "original",
+                    "failure"
+                ],
+                "scheduledState": "ENABLED",
+                "componentType": "PROCESSOR",
+                "groupIdentifier": "353b0942-cf7e-3037-a927-b47749dcad15"
+            }

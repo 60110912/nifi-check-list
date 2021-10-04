@@ -1,0 +1,80 @@
+{
+    "identifier": "3e1a7182-19e2-3ae7-b78f-ded8c347aa46",
+    "name": "outlook_exchange_SSLContextService_Kafka",
+    "comments": "",
+    "type": "org.apache.nifi.ssl.StandardSSLContextService",
+    "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-ssl-context-service-nar",
+        "version": "1.11.4"
+    },
+    "controllerServiceApis": [
+        {
+            "type": "org.apache.nifi.ssl.SSLContextService",
+            "bundle": {
+                "group": "org.apache.nifi",
+                "artifact": "nifi-standard-services-api-nar",
+                "version": "1.11.4"
+            }
+        }
+    ],
+    "properties": {
+        "Truststore Type": "JKS",
+        "SSL Protocol": "TLSv1.2",
+        "Keystore Type": null,
+        "Truststore Filename": "/etc/nifi/current/adeo_empty_pass.jks",
+        "Keystore Filename": null
+    },
+    "propertyDescriptors": {
+        "Truststore Type": {
+            "name": "Truststore Type",
+            "displayName": "Truststore Type",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "SSL Protocol": {
+            "name": "SSL Protocol",
+            "displayName": "TLS Protocol",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Keystore Type": {
+            "name": "Keystore Type",
+            "displayName": "Keystore Type",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Truststore Filename": {
+            "name": "Truststore Filename",
+            "displayName": "Truststore Filename",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Keystore Password": {
+            "name": "Keystore Password",
+            "displayName": "Keystore Password",
+            "identifiesControllerService": false,
+            "sensitive": true
+        },
+        "key-password": {
+            "name": "key-password",
+            "displayName": "Key Password",
+            "identifiesControllerService": false,
+            "sensitive": true
+        },
+        "Truststore Password": {
+            "name": "Truststore Password",
+            "displayName": "Truststore Password",
+            "identifiesControllerService": false,
+            "sensitive": true
+        },
+        "Keystore Filename": {
+            "name": "Keystore Filename",
+            "displayName": "Keystore Filename",
+            "identifiesControllerService": false,
+            "sensitive": false
+        }
+    },
+    "componentType": "CONTROLLER_SERVICE",
+    "groupIdentifier": "353b0942-cf7e-3037-a927-b47749dcad15"
+}
