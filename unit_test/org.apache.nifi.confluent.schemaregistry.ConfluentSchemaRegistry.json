@@ -1,0 +1,62 @@
+{
+    "identifier": "9326b607-efb4-3ba7-ae6f-61e82fbdb44e",
+    "name": "ConfluentSchemaRegistry_from_Kafka",
+    "comments": "",
+    "type": "org.apache.nifi.confluent.schemaregistry.ConfluentSchemaRegistry",
+    "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-confluent-platform-nar",
+        "version": "1.11.4"
+    },
+    "controllerServiceApis": [
+        {
+            "type": "org.apache.nifi.schemaregistry.services.SchemaRegistry",
+            "bundle": {
+                "group": "org.apache.nifi",
+                "artifact": "nifi-standard-services-api-nar",
+                "version": "1.11.4"
+            }
+        }
+    ],
+    "properties": {
+        "cache-expiration": "1 hour",
+        "cache-size": "1000",
+        "ssl-context": null,
+        "url": "${kafka.schema.registry}",
+        "timeout": "30 secs"
+    },
+    "propertyDescriptors": {
+        "cache-expiration": {
+            "name": "cache-expiration",
+            "displayName": "Cache Expiration",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "cache-size": {
+            "name": "cache-size",
+            "displayName": "Cache Size",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "ssl-context": {
+            "name": "ssl-context",
+            "displayName": "SSL Context Service",
+            "identifiesControllerService": true,
+            "sensitive": false
+        },
+        "url": {
+            "name": "url",
+            "displayName": "Schema Registry URLs",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "timeout": {
+            "name": "timeout",
+            "displayName": "Communications Timeout",
+            "identifiesControllerService": false,
+            "sensitive": false
+        }
+    },
+    "componentType": "CONTROLLER_SERVICE",
+    "groupIdentifier": "353b0942-cf7e-3037-a927-b47749dcad15"
+}

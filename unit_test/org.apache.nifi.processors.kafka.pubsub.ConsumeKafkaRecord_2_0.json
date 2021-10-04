@@ -1,0 +1,192 @@
+{
+    "identifier": "657d9fce-7a19-347d-ba1d-c3820918b4d3",
+    "name": "outlook_exchange_ConsumeKafkaRecord_2_0",
+    "comments": "",
+    "position": {
+        "x": 1160.432853903065,
+        "y": 476.51313476880654
+    },
+    "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-kafka-2-0-nar",
+        "version": "1.11.4"
+    },
+    "style": {},
+    "type": "org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecord_2_0",
+    "properties": {
+        "header-name-regex": null,
+        "sasl.username": "${kafka.username}",
+        "max.poll.records": "3000",
+        "record-writer": "525574a7-9cd7-3816-99a8-579f81af557c",
+        "group.id": "${kafka.group}",
+        "bootstrap.servers": "${kafka.hosts}",
+        "topic_type": "names",
+        "sasl.kerberos.principal": null,
+        "sasl.kerberos.service.name": "kafka",
+        "security.protocol": "SASL_SSL",
+        "kerberos-credentials-service": null,
+        "ssl.context.service": "525574a7-9cd7-3816-99a8-579f81af557c",
+        "max-uncommit-offset-wait": "1 secs",
+        "sasl.mechanism": "SCRAM-SHA-256",
+        "sasl.token.auth": "false",
+        "honor-transactions": "true",
+        "sasl.kerberos.keytab": null,
+        "Communications Timeout": "60 secs",
+        "topic": "${kafka.topic}",
+        "record-reader": "525574a7-9cd7-3816-99a8-579f81af557c",
+        "message-header-encoding": "UTF-8",
+        "auto.offset.reset": "earliest"
+    },
+    "propertyDescriptors": {
+        "header-name-regex": {
+            "name": "header-name-regex",
+            "displayName": "Headers to Add as Attributes (Regex)",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "sasl.username": {
+            "name": "sasl.username",
+            "displayName": "Username",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "max.poll.records": {
+            "name": "max.poll.records",
+            "displayName": "Max Poll Records",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "record-writer": {
+            "name": "record-writer",
+            "displayName": "Record Writer",
+            "identifiesControllerService": true,
+            "sensitive": false
+        },
+        "group.id": {
+            "name": "group.id",
+            "displayName": "Group ID",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "bootstrap.servers": {
+            "name": "bootstrap.servers",
+            "displayName": "Kafka Brokers",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "topic_type": {
+            "name": "topic_type",
+            "displayName": "Topic Name Format",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "sasl.kerberos.principal": {
+            "name": "sasl.kerberos.principal",
+            "displayName": "Kerberos Principal",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "sasl.kerberos.service.name": {
+            "name": "sasl.kerberos.service.name",
+            "displayName": "Kerberos Service Name",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "security.protocol": {
+            "name": "security.protocol",
+            "displayName": "Security Protocol",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "kerberos-credentials-service": {
+            "name": "kerberos-credentials-service",
+            "displayName": "Kerberos Credentials Service",
+            "identifiesControllerService": true,
+            "sensitive": false
+        },
+        "ssl.context.service": {
+            "name": "ssl.context.service",
+            "displayName": "SSL Context Service",
+            "identifiesControllerService": true,
+            "sensitive": false
+        },
+        "max-uncommit-offset-wait": {
+            "name": "max-uncommit-offset-wait",
+            "displayName": "Max Uncommitted Time",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "sasl.mechanism": {
+            "name": "sasl.mechanism",
+            "displayName": "SASL Mechanism",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "sasl.token.auth": {
+            "name": "sasl.token.auth",
+            "displayName": "Token Auth",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "honor-transactions": {
+            "name": "honor-transactions",
+            "displayName": "Honor Transactions",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "sasl.kerberos.keytab": {
+            "name": "sasl.kerberos.keytab",
+            "displayName": "Kerberos Keytab",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Communications Timeout": {
+            "name": "Communications Timeout",
+            "displayName": "Communications Timeout",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "topic": {
+            "name": "topic",
+            "displayName": "Topic Name(s)",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "record-reader": {
+            "name": "record-reader",
+            "displayName": "Record Reader",
+            "identifiesControllerService": true,
+            "sensitive": false
+        },
+        "message-header-encoding": {
+            "name": "message-header-encoding",
+            "displayName": "Message Header Encoding",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "sasl.password": {
+            "name": "sasl.password",
+            "displayName": "Password",
+            "identifiesControllerService": false,
+            "sensitive": true
+        },
+        "auto.offset.reset": {
+            "name": "auto.offset.reset",
+            "displayName": "Offset Reset",
+            "identifiesControllerService": false,
+            "sensitive": false
+        }
+    },
+    "schedulingPeriod": "0 sec",
+    "schedulingStrategy": "TIMER_DRIVEN",
+    "executionNode": "ALL",
+    "penaltyDuration": "30 sec",
+    "yieldDuration": "1 sec",
+    "bulletinLevel": "WARN",
+    "runDurationMillis": 0,
+    "concurrentlySchedulableTaskCount": 1,
+    "autoTerminatedRelationships": [],
+    "scheduledState": "ENABLED",
+    "componentType": "PROCESSOR",
+    "groupIdentifier": "353b0942-cf7e-3037-a927-b47749dcad15"
+}

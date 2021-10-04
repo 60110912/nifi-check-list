@@ -1,0 +1,91 @@
+{
+    "identifier": "0fbcbfb2-dcb4-3463-8d4d-e063626e59c2",
+    "name": "outlook_exchange_PutSQL",
+    "comments": "",
+    "position": {
+        "x": 1826.3598545990847,
+        "y": 1085.9629676422644
+    },
+    "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "1.11.4"
+    },
+    "style": {},
+    "type": "org.apache.nifi.processors.standard.PutSQL",
+    "properties": {
+        "Support Fragmented Transactions": "false",
+        "putsql-sql-statement": null,
+        "Transaction Timeout": null,
+        "Batch Size": "3",
+        "Obtain Generated Keys": "false",
+        "JDBC Connection Pool": "ba969a67-3122-34b9-9b12-0fb424898bfa",
+        "database-session-autocommit": "false",
+        "rollback-on-failure": "true"
+    },
+    "propertyDescriptors": {
+        "Support Fragmented Transactions": {
+            "name": "Support Fragmented Transactions",
+            "displayName": "Support Fragmented Transactions",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "putsql-sql-statement": {
+            "name": "putsql-sql-statement",
+            "displayName": "SQL Statement",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Transaction Timeout": {
+            "name": "Transaction Timeout",
+            "displayName": "Transaction Timeout",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Batch Size": {
+            "name": "Batch Size",
+            "displayName": "Batch Size",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Obtain Generated Keys": {
+            "name": "Obtain Generated Keys",
+            "displayName": "Obtain Generated Keys",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "JDBC Connection Pool": {
+            "name": "JDBC Connection Pool",
+            "displayName": "JDBC Connection Pool",
+            "identifiesControllerService": true,
+            "sensitive": false
+        },
+        "database-session-autocommit": {
+            "name": "database-session-autocommit",
+            "displayName": "Database Session AutoCommit",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "rollback-on-failure": {
+            "name": "rollback-on-failure",
+            "displayName": "Rollback On Failure",
+            "identifiesControllerService": false,
+            "sensitive": false
+        }
+    },
+    "schedulingPeriod": "1 sec",
+    "schedulingStrategy": "TIMER_DRIVEN",
+    "executionNode": "ALL",
+    "penaltyDuration": "30 sec",
+    "yieldDuration": "1 sec",
+    "bulletinLevel": "WARN",
+    "runDurationMillis": 0,
+    "concurrentlySchedulableTaskCount": 2,
+    "autoTerminatedRelationships": [
+        "success",
+        "failure"
+    ],
+    "scheduledState": "ENABLED",
+    "componentType": "PROCESSOR",
+    "groupIdentifier": "353b0942-cf7e-3037-a927-b47749dcad15"
+}

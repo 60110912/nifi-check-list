@@ -1,0 +1,131 @@
+{
+    "identifier": "ba969a67-3122-34b9-9b12-0fb424898bf5",
+    "name": "outlook_exchange_GP",
+    "comments": "",
+    "type": "org.apache.nifi.dbcp.DBCPConnectionPool",
+    "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-dbcp-service-nar",
+        "version": "1.11.4"
+    },
+    "controllerServiceApis": [
+        {
+            "type": "org.apache.nifi.dbcp.DBCPService",
+            "bundle": {
+                "group": "org.apache.nifi",
+                "artifact": "nifi-standard-services-api-nar",
+                "version": "1.11.4"
+            }
+        }
+    ],
+    "properties": {
+        "dbcp-min-idle-conns": "0",
+        "Max Wait Time": "500 millis",
+        "Database Driver Class Name": "org.postgresql.Driver",
+        "dbcp-min-evictable-idle-time": "30 mins",
+        "Max Total Connections": "8",
+        "kerberos-credentials-service": null,
+        "dbcp-max-conn-lifetime": "-1",
+        "Validation-query": null,
+        "Database Connection URL": "jdbc:postgresql://${gp.server.name}:${gp.server.port}/${gp.server.database}?prepareThreshold=0",
+        "dbcp-time-between-eviction-runs": "-1",
+        "Database User": "outlookexch_ingestbot",
+        "dbcp-soft-min-evictable-idle-time": "-1",
+        "database-driver-locations": "/etc/nifi/current/lib/",
+        "dbcp-max-idle-conns": "8"
+    },
+    "propertyDescriptors": {
+        "dbcp-min-idle-conns": {
+            "name": "dbcp-min-idle-conns",
+            "displayName": "Minimum Idle Connections",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Max Wait Time": {
+            "name": "Max Wait Time",
+            "displayName": "Max Wait Time",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Database Driver Class Name": {
+            "name": "Database Driver Class Name",
+            "displayName": "Database Driver Class Name",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "dbcp-min-evictable-idle-time": {
+            "name": "dbcp-min-evictable-idle-time",
+            "displayName": "Minimum Evictable Idle Time",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Max Total Connections": {
+            "name": "Max Total Connections",
+            "displayName": "Max Total Connections",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "kerberos-credentials-service": {
+            "name": "kerberos-credentials-service",
+            "displayName": "Kerberos Credentials Service",
+            "identifiesControllerService": true,
+            "sensitive": false
+        },
+        "dbcp-max-conn-lifetime": {
+            "name": "dbcp-max-conn-lifetime",
+            "displayName": "Max Connection Lifetime",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Validation-query": {
+            "name": "Validation-query",
+            "displayName": "Validation query",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Database Connection URL": {
+            "name": "Database Connection URL",
+            "displayName": "Database Connection URL",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "dbcp-time-between-eviction-runs": {
+            "name": "dbcp-time-between-eviction-runs",
+            "displayName": "Time Between Eviction Runs",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Database User": {
+            "name": "Database User",
+            "displayName": "Database User",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "dbcp-soft-min-evictable-idle-time": {
+            "name": "dbcp-soft-min-evictable-idle-time",
+            "displayName": "Soft Minimum Evictable Idle Time",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "database-driver-locations": {
+            "name": "database-driver-locations",
+            "displayName": "Database Driver Location(s)",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "dbcp-max-idle-conns": {
+            "name": "dbcp-max-idle-conns",
+            "displayName": "Max Idle Connections",
+            "identifiesControllerService": false,
+            "sensitive": false
+        },
+        "Password": {
+            "name": "Password",
+            "displayName": "Password",
+            "identifiesControllerService": false,
+            "sensitive": true
+        }
+    },
+    "componentType": "CONTROLLER_SERVICE",
+    "groupIdentifier": "353b0942-cf7e-3037-a927-b47749dcad15"
+}

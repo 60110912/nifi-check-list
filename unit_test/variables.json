@@ -1,0 +1,11 @@
+   {
+        "kafka.schema.registry": "http://t-kafka-st03.hq.ru.corp.leroymerlin.com:8081",
+        "kafka.hosts": "t-kafka-st01.hq.ru.corp.leroymerlin.com:9094,t-kafka-st02.hq.ru.corp.leroymerlin.com:9094,t-kafka-st03.hq.ru.corp.leroymerlin.com:9094",
+        "gp.server.port": "5433",
+        "gp.server.database": "adb",
+        "kafka.topic": "data.init.p-exrep-db01_exchrep_dbo.avro.test",
+        "gp.schema": "outlook_exchange_raw",
+        "kafka.username": "exchrep-tdpkfk-all",
+        "gp.server.name": "gp.devdata.lmru.tech",
+        "kafka.group": "exchrep-group-test"
+    }
