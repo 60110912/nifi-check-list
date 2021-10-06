@@ -12,7 +12,7 @@ FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 log = logging.getLogger("validate_nifi")
 
 
-def allProcessorsIsEnables(jsonobj):
+def checkAllProcessorsIsEnables(jsonobj):
     """
     Функция проверяет, что все процессоры включены:
     Параметр:
@@ -30,7 +30,7 @@ def allProcessorsIsEnables(jsonobj):
     log.debug('Проверка закончена по пункту "Включены все процессоры"')
 
 
-def allProcessorValidName(jsonobj):
+def checkAllProcessorValidName(jsonobj):
     """
     Функция проверяет, что все процессоры начинаются одинаково:
     Параметр:
@@ -46,6 +46,46 @@ def allProcessorValidName(jsonobj):
         else:
             print("Record #{}: ERROR\n".format(item['name']))
     log.debug('Проверка закончена по пункту "Префикс системы"')
+
+
+def checkConsumeKafkaRecor(g: NifiMultyGraph) -> pd.DataFrame:
+    """
+        Функция проверяет топологию графа.
+        Параметр:
+            g - объект класса NifiMultyGraph
+    """
+    log.debug('Проверяем пункт "Стандарт выходов из KafkaRecord"')
+    return g.checkConsumeKafkaRecord()
+
+
+def checkMergeContentBeforePut(g: NifiMultyGraph, jsonobj):
+    """
+    Функция проверяет топологию графа и для выбранного Merge компонента проверяет параметры.
+    Параметр:
+            g - объект класса NifiMultyGraph
+    """
+    log.debug('Проверяем правильность заполненности "Merge компонента"')
+    testedMerge = g.selectMergeContentBeforePut()
+    log.debug(f'Для идентификатора {testedMerge} получам объект')
+    processors = jsonpath.jsonpath(jsonobj, f"$..processors[?(@.identifier == '{testedMerge}')]")
+    for idx, item in enumerate(processors):
+        try:
+            identifier = item['identifier']
+            log.debug(f'Для идентификатора {identifier} проверяем заполнение параметров')
+            validate(item, nifiValidationShcemas['MergeContent_before_Put'])
+            log.debug(f'Для идентификатора {identifier} параметры нормальные')
+        except exceptions.ValidationError as ve:
+            log.error(ve)
+            log.debug(f'Ошибка в настройках идентификатора {identifier}')
+
+
+def checkSchemaController(jsonobj):
+    """
+    Функция проверки схем у controller servece
+    Параметр:
+        jsonobj - схема nifi
+    """
+    pass
 
 
 # Преобразовать строку формата json в объект python
@@ -105,13 +145,14 @@ def main(file, log):
         data = json_file.read()
     jsonobj = json.loads(data)
     print(getAllComponent(jsonobj))
-    allProcessorsIsEnables(jsonobj)
-    allProcessorValidName(jsonobj)
+    checkAllProcessorsIsEnables(jsonobj)
+    checkAllProcessorValidName(jsonobj)
     g = NifiMultyGraph()
     g.nifiSchemaLoad(jsonobj)
     test = g.checkConsumeKafkaRecord()
     print(test)
     print(g.selectMergeContentBeforePut())
+    checkMergeContentBeforePut(g, jsonobj)
 
 
 if __name__ == "__main__":
