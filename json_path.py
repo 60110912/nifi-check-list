@@ -1,6 +1,3 @@
-# jsonpath_lagou.py
-
-import os
 import re
 import jsonpath
 import json
@@ -9,16 +6,19 @@ from validation_shcema import nifiValidationShcemas
 import pandas as pd
 from NifiMyltyGraph import NifiMultyGraph
 import logging
-from logging import config
+import click
 
 FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-logging.basicConfig(
-    level=logging.DEBUG,
-    format=FORMAT)
-
+log = logging.getLogger("validate_nifi")
 
 
 def allProcessorsIsEnables(jsonobj):
+    """
+    Функция проверяет, что все процессоры включены:
+    Параметр:
+        jsonobj - схема nifi
+    """
+    log.debug('Проверяем пункт "Включены все процессоры"')
     processors = jsonpath.jsonpath(jsonobj, '$..processors.*')
     for idx, item in enumerate(processors):
         try:
@@ -27,9 +27,16 @@ def allProcessorsIsEnables(jsonobj):
         except exceptions.ValidationError as ve:
             print(ve)
             print("Record #{}: ERROR\n".format(item['name']))
+    log.debug('Проверка закончена по пункту "Включены все процессоры"')
 
 
 def allProcessorValidName(jsonobj):
+    """
+    Функция проверяет, что все процессоры начинаются одинаково:
+    Параметр:
+        jsonobj - схема nifi
+    """
+    log.debug('Проверяем пункт "Префикс системы"')
     name_pattern = jsonpath.jsonpath(jsonobj, '$.flowContents.name')[0]
     name_pattern = '^' + name_pattern
     processors = jsonpath.jsonpath(jsonobj, '$..processors.*')
@@ -38,20 +45,28 @@ def allProcessorValidName(jsonobj):
             print("Record #{}: OK\n".format(item['name']))
         else:
             print("Record #{}: ERROR\n".format(item['name']))
+    log.debug('Проверка закончена по пункту "Префикс системы"')
 
 
 # Преобразовать строку формата json в объект python
 def getAllComponent(jsonobj) -> pd.DataFrame:
+    """
+    Функция выдает все объекты, которые есть в схеме:
+    Параметр:
+        jsonobj - схема nifi
+    """
     all_node = jsonobj['flowContents']
+    log.debug('Получаем название Flow')
     result = pd.DataFrame(
                 [[
                     all_node['identifier'],
                     all_node['name'],
                     all_node['componentType']
                 ]],
-                columns=['identifier', 'name', 'componentType'], 
+                columns=['identifier', 'name', 'componentType'],
                 index=['identifier']
             )
+    log.debug('Получаем вложенных объектов во Flow')
     for item, value in all_node.items():
         if isinstance(value, type([])):
             all_sub = jsonpath.jsonpath(
@@ -69,20 +84,38 @@ def getAllComponent(jsonobj) -> pd.DataFrame:
                             index=['identifier']
                         )
                     result = result.append(df)
+    log.debug('Возвращаем датафрейм со всеми объектами')
     return result
 
 
-if __name__ == "__main__":
-    with open('outlook_exchange.json') as json_file:
+@click.command()
+@click.option('--file',  help='Validate file must be a json struct')
+@click.option(
+    '--log',
+    default="DEBUG",
+    type=click.Choice(['DEBUG', 'INFO', 'WARNING', 'ERROR']),
+    help='Log level. Default log level DEBUG')
+def main(file, log):
+    logging.basicConfig(
+        level=log,
+        format=FORMAT
+    )
+
+    with open(file) as json_file:
         data = json_file.read()
     jsonobj = json.loads(data)
-    #print(getAllComponent(jsonobj))
-    #allProcessorsIsEnables(jsonobj)
-    #allProcessorValidName(jsonobj)
+    print(getAllComponent(jsonobj))
+    allProcessorsIsEnables(jsonobj)
+    allProcessorValidName(jsonobj)
     g = NifiMultyGraph()
     g.nifiSchemaLoad(jsonobj)
     test = g.checkConsumeKafkaRecord()
     print(test)
+    print(g.selectMergeContentBeforePut())
+
+
+if __name__ == "__main__":
+    main()
 
 
 # Тест
@@ -97,7 +130,7 @@ if __name__ == "__main__":
 #             "properties":{
 #                 "type" :"object",
 #                 "properties" : {
-#                     "JDBC Connection Pool":{"type": "string", 
+#                     "JDBC Connection Pool":{"type": "string",
 #                             "pattern": '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
 #                             "minLength": 36,
 #                             "maxLength": 36}
@@ -105,8 +138,7 @@ if __name__ == "__main__":
 #                 "required": ["JDBC Connection Pool"]
 #             },
 #         },
-#         "required": ["scheduledState"] 
+#         "required": ["scheduledState"]
 # }
-
 # v = Draft201909Validator(schema)
 # validate(jsonobj, schema)
