@@ -46,10 +46,11 @@ class NifiMultyGraph (MultiDiGraph):
             temp_result = pd.DataFrame(
                 [[
                     item,
-                    0
+                    'ConsumeKafkaRecord ->parse.failure-> ConvertRecord',
+                    'Error',
+                    'Нет ребра по parse.failure'
                 ]],
-                columns=['identifier', 'ConsumeKafkaRecord_2_0'],
-                index=['identifier']
+                columns=['Identifier', 'Tests name', 'Result', 'Message']
             )
             for n, nbdict in self.adj[item].items():
                 log.debug(f'Ищем связь по parse.failure для item = {item}')
