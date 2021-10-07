@@ -762,7 +762,7 @@
                     "Script File": "/etc/nifi/current/scripts/js/generate_insert_for_mssql.js",
                     "Script Engine": "ECMAScript",
                     "Script Body": null,
-                    "Module Directory": null,
+                    "Module Directory": "/etc/nifi/current/lib/",
                     "prop_schema_name": "${gp.schema}"
                 },
                 "propertyDescriptors": {

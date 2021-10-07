@@ -1,5 +1,0 @@
-connections:
-  nifi_url: 'https://nifi.devdata.lmru.tech/nifi-api'
-credentials:
-  login: '60067287'
-  password: '???'
