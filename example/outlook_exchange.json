@@ -187,10 +187,10 @@
                 "style": {},
                 "type": "org.apache.nifi.processors.script.ExecuteScript",
                 "properties": {
-                    "Script File": "/etc/nifi/current/scripts/groovy/convert_avro_debezium.groovy",
+                    "Script File": "/etc/nifi/wcurrent/scripts/groovy/convert_avro_debezium.groovy",
                     "Script Engine": "Groovy",
                     "Script Body": null,
-                    "Module Directory": "/etc/nifi/current/lib/"
+                    "Module Directory": "/etc/nifi/"
                 },
                 "propertyDescriptors": {
                     "Script File": {
@@ -250,10 +250,10 @@
                 "type": "org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecord_2_0",
                 "properties": {
                     "header-name-regex": null,
-                    "sasl.username": "${kafka.username}",
+                    "sasl.username": "{kafka.username}",
                     "max.poll.records": "3000",
                     "record-writer": "b9b01dbd-5074-37b7-aad7-d6e287b99749",
-                    "group.id": "${kafka.group}",
+                    "group.id": "#{kafka.group}",
                     "bootstrap.servers": "${kafka.hosts}",
                     "topic_type": "names",
                     "sasl.kerberos.principal": null,
@@ -421,7 +421,7 @@
                 "runDurationMillis": 0,
                 "concurrentlySchedulableTaskCount": 4,
                 "autoTerminatedRelationships": [],
-                "scheduledState": "ENABLED",
+                "scheduledState": "DISABLE",
                 "componentType": "PROCESSOR",
                 "groupIdentifier": "353b0942-cf7e-3037-a927-b47749dcad15"
             },
@@ -759,10 +759,10 @@
                 "style": {},
                 "type": "org.apache.nifi.processors.script.ExecuteScript",
                 "properties": {
-                    "Script File": "/etc/nifi/current/scripts/js/generate_insert_for_mssql.js",
+                    "Script File": "/etc_nifi/current/scripts/js/generate_insert_for_mssql.js",
                     "Script Engine": "ECMAScript",
                     "Script Body": null,
-                    "Module Directory": "/etc/nifi/current/lib/",
+                    "Module Directory": "etc/nifi/current/lib/",
                     "prop_schema_name": "${gp.schema}"
                 },
                 "propertyDescriptors": {
@@ -836,7 +836,7 @@
                 "labelIndex": 1,
                 "zIndex": 0,
                 "selectedRelationships": [
-                    "parse.failure"
+                    "parse    failure"
                 ],
                 "backPressureObjectThreshold": 10000,
                 "backPressureDataSizeThreshold": "1 GB",

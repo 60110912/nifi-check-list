@@ -9,6 +9,19 @@ import logging
 log = logging.getLogger("validate_nifi")
 
 
+def makeErrorMessage(errorObject) -> str:
+    """
+    Функция формирует ответ ошибки несоответсвия схемы данных:
+    Параметр:
+        source - строка с непечатными символами
+    """
+    return str(
+        str(errorObject.message) 
+        + " " + str(errorObject.validator) 
+        + " " + str(errorObject.validator_value)
+        )
+
+
 def checkAllProcessorsIsEnables(jsonobj) -> pd.DataFrame:
     """
     Функция проверяет, что все процессоры включены:
@@ -30,7 +43,7 @@ def checkAllProcessorsIsEnables(jsonobj) -> pd.DataFrame:
                     item['identifier'],
                     testName,
                     'Error',
-                    ve
+                    makeErrorMessage(ve)
                 ]],
                 columns=['Identifier', 'Tests name', 'Result', 'Message']
             )
@@ -105,7 +118,7 @@ def checkMergeContentBeforePut(g: NifiMultyGraph, jsonobj) -> pd.DataFrame:
                     item['identifier'],
                     testName,
                     'Error',
-                    ve
+                    makeErrorMessage(ve)
                 ]],
                 columns=['Identifier', 'Tests name', 'Result', 'Message']
             )
@@ -150,7 +163,7 @@ def checkSchemaObjects(jsonobj) -> pd.DataFrame:
                     item['identifier'],
                     testName,
                     'Error',
-                    ve
+                    makeErrorMessage(ve)
                 ]],
                 columns=['Identifier', 'Tests name', 'Result', 'Message']
             )
@@ -197,6 +210,3 @@ def getAllComponent(jsonobj) -> pd.DataFrame:
                     result = result.append(df)
     log.debug('Возвращаем датафрейм со всеми объектами')
     return result
-
-
-
