@@ -17,7 +17,7 @@ class NifiMultyGraph (MultiDiGraph):
                 name=item['name']
             )
         log.debug('Инициализиреум связи как ребра')
-        connections = jsonpath.jsonpath(nifiSchema, '$.flowContents.connections.*')
+        connections = jsonpath.jsonpath(nifiSchema, '$..connections.*')
         for item in connections:
             for rel in item['selectedRelationships']:
                 self.add_edge(

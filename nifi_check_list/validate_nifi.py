@@ -16,8 +16,8 @@ def makeErrorMessage(errorObject) -> str:
         source - строка с непечатными символами
     """
     return str(
-        str(errorObject.message) 
-        + " " + str(errorObject.validator) 
+        str(errorObject.message)
+        + " " + str(errorObject.validator)
         + " " + str(errorObject.validator_value)
         )
 
@@ -61,9 +61,18 @@ def checkAllProcessorValidName(jsonobj) -> pd.DataFrame:
     testName = "Префикс системы"
     log.debug(f'Проверяем пункт "{testName}"')
     result = pd.DataFrame()
-    name_pattern = jsonpath.jsonpath(jsonobj, '$.flowContents.name')[0]
-    name_pattern = '^' + name_pattern
+    log.debug("Определяем самый популярный префикс")
     processors = jsonpath.jsonpath(jsonobj, '$..processors.*')
+    popular_prefix_names ={}
+    for item in processors:
+        prefix_name = item["name"].split("_")[0]
+        if prefix_name in popular_prefix_names:
+            popular_prefix_names[prefix_name] += 1
+        else:
+            popular_prefix_names[prefix_name] = 1
+    popular_prefix = max(popular_prefix_names, key=popular_prefix_names.get)
+    log.debug(f'Популярный префикс {popular_prefix}')
+    name_pattern = '^' + popular_prefix + "_"
     for item in processors:
         if re.match(name_pattern, item['name']):
             log.debug("Record #{}: OK".format(item['name']))
@@ -104,8 +113,12 @@ def checkMergeContentBeforePut(g: NifiMultyGraph, jsonobj) -> pd.DataFrame:
     result = pd.DataFrame()
     log.debug(f'Проверяем правильность заполненности "{testName}"')
     testedMerge = g.selectMergeContentBeforePut()
+    if testedMerge is None:
+        log.info('Не найден Merge процесс перед вставкой в GP')
+        return result
     log.debug(f'Для идентификатора {testedMerge} получам объект')
     processors = jsonpath.jsonpath(jsonobj, f"$..processors[?(@.identifier == '{testedMerge}')]")
+    
     for item in processors:
         try:
             identifier = item['identifier']

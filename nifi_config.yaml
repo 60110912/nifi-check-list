@@ -1,0 +1,10 @@
+nifi:
+  registry_config:
+    access_token: !!binary |
+      ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKemRXSWlPaUkyTURFeE1Ea3hNaUlzSW1semN5STZJa3hr
+      WVhCSlpHVnVkR2wwZVZCeWIzWnBaR1Z5SWl3aVlYVmtJam9pVEdSaGNFbGtaVzUwYVhSNVVISnZk
+      bWxrWlhJaUxDSndjbVZtWlhKeVpXUmZkWE5sY201aGJXVWlPaUkyTURFeE1Ea3hNaUlzSW10cFpD
+      STZJakV5WkRZME5qQXlMVEU1T0RRdE5EWXlZaTFoTVRnNExXTXlZV1UzWTJKa09ESTBPQ0lzSW1s
+      aGRDSTZNVFl6TkRJNU9UZzJPU3dpWlhod0lqb3hOak0wTXpRek1EWTVmUS5YSWc0Ri13U2dkNzlv
+      czZBV2p5SEpxaEtzaXY3QzVoWEpwQnpiYUZPbEgw
+    host: https://registry.devdata.lmru.tech/nifi-registry-api
