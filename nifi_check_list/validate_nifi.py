@@ -24,20 +24,20 @@ def makeErrorMessage(errorObject) -> str:
 
 def checkAllProcessorsIsEnables(jsonobj) -> pd.DataFrame:
     """
-    Функция проверяет, что все процессоры включены:
+    Функция проверяет, что все процессоры Enables:
     Параметр:
         jsonobj - схема nifi
     """
     testName = "Включены все процессоры"
-    log.debug(f'Проверяем пункт "{testName}"')
+    log.info(f'Проверяем пункт "{testName}"')
     processors = jsonpath.jsonpath(jsonobj, '$..processors.*')
     result = pd.DataFrame()
     for item in processors:
         try:
             validate(item, nifiValidationShcemas['processors_enabled'])
-            log.debug("Record #{}: OK".format(item['name']))
+            log.info("Record #{}: OK".format(item['name']))
         except exceptions.ValidationError as ve:
-            log.debug("Record #{}: ERROR".format(item['name']))
+            log.info("Record #{}: ERROR".format(item['name']))
             temp_result = pd.DataFrame(
                 [[
                     item['identifier'],
@@ -48,7 +48,7 @@ def checkAllProcessorsIsEnables(jsonobj) -> pd.DataFrame:
                 columns=['Identifier', 'Tests name', 'Result', 'Message']
             )
             result = result.append(temp_result)
-    log.debug(f'Проверка закончена по пункту "{testName}"')
+    log.info(f'Проверка закончена по пункту "{testName}"')
     return result
 
 
@@ -59,11 +59,11 @@ def checkAllProcessorValidName(jsonobj) -> pd.DataFrame:
         jsonobj - схема nifi
     """
     testName = "Префикс системы"
-    log.debug(f'Проверяем пункт "{testName}"')
+    log.info(f'Проверяем пункт "{testName}"')
     result = pd.DataFrame()
-    log.debug("Определяем самый популярный префикс")
+    log.info("Определяем самый популярный префикс")
     processors = jsonpath.jsonpath(jsonobj, '$..processors.*')
-    popular_prefix_names ={}
+    popular_prefix_names = {}
     for item in processors:
         prefix_name = item["name"].split("_")[0]
         if prefix_name in popular_prefix_names:
@@ -71,13 +71,15 @@ def checkAllProcessorValidName(jsonobj) -> pd.DataFrame:
         else:
             popular_prefix_names[prefix_name] = 1
     popular_prefix = max(popular_prefix_names, key=popular_prefix_names.get)
-    log.debug(f'Популярный префикс {popular_prefix}')
+    log.info(f'Популярный префикс {popular_prefix}')
+    log.info('Формируем регулярное выражение')
     name_pattern = '^' + popular_prefix + "_"
+    log.info('Проверяем имя каждого процессора на совпадение')
     for item in processors:
         if re.match(name_pattern, item['name']):
-            log.debug("Record #{}: OK".format(item['name']))
+            log.info("Record #{}: OK".format(item['name']))
         else:
-            log.debug("Record #{}: ERROR".format(item['name']))
+            log.info("Record #{}: ERROR".format(item['name']))
             temp_result = pd.DataFrame(
                 [[
                     item['identifier'],
@@ -88,7 +90,7 @@ def checkAllProcessorValidName(jsonobj) -> pd.DataFrame:
                 columns=['Identifier', 'Tests name', 'Result', 'Message']
             )
             result = result.append(temp_result)
-    log.debug(f'Проверка закончена по пункту "{testName}"')
+    log.info(f'Проверка закончена по пункту "{testName}"')
     return result
 
 
@@ -99,7 +101,7 @@ def checkConsumeKafkaRecor(g: NifiMultyGraph) -> pd.DataFrame:
             g - объект класса NifiMultyGraph
     """
     testName = "Стандарт выходов из KafkaRecord"
-    log.debug(f'Проверяем пункт "{testName}"')
+    log.info(f'Проверяем пункт "{testName}"')
     return g.checkConsumeKafkaRecord()
 
 
@@ -111,20 +113,20 @@ def checkMergeContentBeforePut(g: NifiMultyGraph, jsonobj) -> pd.DataFrame:
     """
     testName = "Merge компонента перед вставкой"
     result = pd.DataFrame()
-    log.debug(f'Проверяем правильность заполненности "{testName}"')
+    log.info(f'Проверяем правильность заполненности "{testName}"')
     testedMerge = g.selectMergeContentBeforePut()
     if testedMerge is None:
         log.info('Не найден Merge процесс перед вставкой в GP')
         return result
-    log.debug(f'Для идентификатора {testedMerge} получам объект')
+    log.info(f'Для идентификатора {testedMerge} получам объект')
     processors = jsonpath.jsonpath(jsonobj, f"$..processors[?(@.identifier == '{testedMerge}')]")
-    
+
     for item in processors:
         try:
             identifier = item['identifier']
-            log.debug(f'Для идентификатора {identifier} проверяем заполнение параметров')
+            log.info(f'Для идентификатора {identifier} проверяем заполнение параметров')
             validate(item, nifiValidationShcemas['MergeContent_before_Put'])
-            log.debug(f'Для идентификатора {identifier} параметры нормальные')
+            log.info(f'Для идентификатора {identifier} параметры нормальные')
         except exceptions.ValidationError as ve:
             temp_result = pd.DataFrame(
                 [[
@@ -136,7 +138,7 @@ def checkMergeContentBeforePut(g: NifiMultyGraph, jsonobj) -> pd.DataFrame:
                 columns=['Identifier', 'Tests name', 'Result', 'Message']
             )
             result = result.append(temp_result)
-            log.debug(f'Ошибка в настройках идентификатора {identifier}')
+            log.info(f'Ошибка в настройках идентификатора {identifier}')
     return result
 
 
@@ -147,17 +149,17 @@ def checkSchemaObjects(jsonobj) -> pd.DataFrame:
         jsonobj - схема nifi
     """
     testName = 'Валидация стандартов оформления ресурсов'
-    log.debug(f'Запускаем тест "{testName}"')
+    log.info(f'Запускаем тест "{testName}"')
     resource = jsonpath.jsonpath(jsonobj, '$..processors.*')
     resource += jsonpath.jsonpath(jsonobj, '$..controllerServices.*')
     result = pd.DataFrame()
     for item in resource:
         try:
             (identifier, objectType) = (item['identifier'], item['type'])
-            log.debug(f'Для объекта {identifier} применяем схему валидации {objectType}')
+            log.info(f'Для объекта {identifier} применяем схему валидации {objectType}')
             if item['type'] in nifiValidationShcemas:
                 validate(item, nifiValidationShcemas[objectType])
-                log.debug("Record #{}: OK".format(item['name']))
+                log.info("Record #{}: OK".format(item['name']))
             else:
                 temp_result = pd.DataFrame(
                     [[
@@ -170,7 +172,7 @@ def checkSchemaObjects(jsonobj) -> pd.DataFrame:
                 )
                 result = result.append(temp_result)
         except exceptions.ValidationError as ve:
-            log.debug("Record #{}: ERROR".format(item['name']))
+            log.info("Record #{}: ERROR".format(item['name']))
             temp_result = pd.DataFrame(
                 [[
                     item['identifier'],
@@ -181,19 +183,19 @@ def checkSchemaObjects(jsonobj) -> pd.DataFrame:
                 columns=['Identifier', 'Tests name', 'Result', 'Message']
             )
             result = result.append(temp_result)
-    log.debug(f'Закончили тест "{testName}"')
+    log.info(f'Закончили тест "{testName}"')
     return result
 
 
 # Преобразовать строку формата json в объект python
-def getAllComponent(jsonobj) -> pd.DataFrame:
+def getAllComponent(jsonobj, id=None) -> pd.DataFrame:
     """
     Функция выдает все объекты, которые есть в схеме:
     Параметр:
         jsonobj - схема nifi
     """
     all_node = jsonobj['flowContents']
-    log.debug('Получаем название Flow')
+    log.info('Получаем название Flow')
     result = pd.DataFrame(
                 [[
                     all_node['identifier'],
@@ -203,7 +205,18 @@ def getAllComponent(jsonobj) -> pd.DataFrame:
                 ]],
                 columns=['Identifier', 'name', 'componentType', 'type']
             )
-    log.debug('Получаем вложенных объектов во Flow')
+    if id:
+        df = pd.DataFrame(
+                            [[
+                                id,
+                                "Process Group",
+                                "Process Group",
+                                "Process Group"
+                            ]], columns=['Identifier', 'name', 'componentType', 'type']
+                        )
+        result = result.append(df)
+
+    log.info('Получаем вложенных объектов во Flow')
     for item, value in all_node.items():
         if isinstance(value, type([])):
             all_sub = jsonpath.jsonpath(
@@ -215,11 +228,40 @@ def getAllComponent(jsonobj) -> pd.DataFrame:
                     df = pd.DataFrame(
                             [[
                                 node['identifier'],
-                                node['name'],
-                                node['componentType'],
+                                node.get('name'),
+                                node.get('componentType'),
                                 node.get('type')
                             ]], columns=['Identifier', 'name', 'componentType', 'type']
                         )
                     result = result.append(df)
-    log.debug('Возвращаем датафрейм со всеми объектами')
+    log.info('Возвращаем датафрейм со всеми объектами')
+    return result
+
+
+def checkAllProcessorsIsNormal(jsonobj) -> pd.DataFrame:
+    """
+    Функция проверяет, что все процессоры включены:
+    Параметр:
+        jsonobj - схема nifi
+    """
+    testName = "Включены все процессоры и нет неактивных"
+    result = pd.DataFrame()
+    item = jsonobj
+    log.info(f'Проверяем пункт "{testName}"')
+    try:
+        validate(jsonobj, nifiValidationShcemas['process_group_check_status'])
+        log.info("Record #{}: OK".format(item['id']))
+    except exceptions.ValidationError as ve:
+        log.info("Record #{}: ERROR".format(item['id']))
+        temp_result = pd.DataFrame(
+            [[
+                item['id'],
+                testName,
+                'Error',
+                makeErrorMessage(ve)
+            ]],
+            columns=['Identifier', 'Tests name', 'Result', 'Message']
+        )
+        result = result.append(temp_result)
+    log.info(f'Проверка закончена по пункту "{testName}"')
     return result

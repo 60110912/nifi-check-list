@@ -6,26 +6,38 @@ import logging
 log = logging.getLogger("NifiMultiGraph")
 
 
+class ErrorLoadGraph(Exception):
+    def __init__(self, message):
+        # Call the base class constructor with the parameters it needs
+        self.message = message
+
+
 class NifiMultyGraph (MultiDiGraph):
     def nifiSchemaLoad(self, nifiSchema):
         log.debug('Инициализиреум процессоры как вершины')
-        processors = jsonpath.jsonpath(nifiSchema, '$..processors.*')
-        for item in processors:
-            self.add_node(
-                item['identifier'],
-                type=item['type'],
-                name=item['name']
-            )
-        log.debug('Инициализиреум связи как ребра')
-        connections = jsonpath.jsonpath(nifiSchema, '$..connections.*')
-        for item in connections:
-            for rel in item['selectedRelationships']:
-                self.add_edge(
-                    item['source']['id'],
-                    item['destination']['id'],
-                    type=rel,
-                    weight=1
+        try:
+            processors = jsonpath.jsonpath(nifiSchema, '$..processors.*')
+            for item in processors:
+                self.add_node(
+                    item['identifier'],
+                    type=item['type'],
+                    name=item['name']
                 )
+        except Exception as e:
+            raise ErrorLoadGraph(f"Загрузить вершины {e}")
+        try:
+            log.debug('Инициализиреум связи как ребра')
+            connections = jsonpath.jsonpath(nifiSchema, '$..connections.*')
+            for item in connections:
+                for rel in item['selectedRelationships']:
+                    self.add_edge(
+                        item['source']['id'],
+                        item['destination']['id'],
+                        type=rel,
+                        weight=1
+                    )
+        except Exception as e:
+            raise ErrorLoadGraph(f"Не могу загрузить связи {e}")
         log.debug('Инициализация графа закончена')
 
     def selectNodeWithAttribute(self, attribute_type, attribute_value) -> list:

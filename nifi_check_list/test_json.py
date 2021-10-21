@@ -1,11 +1,11 @@
 
 import json
 from jsonschema import validate, Draft201909Validator
-from validation_shcema import nifiValidationShcemas
+# from validation_shcema import nifiValidationShcemas
 
 
 # Тест
-testSchema = 'versionControlInformation'
+testSchema = 'check_status'
 with open(f'nifi_check_list/template/{testSchema}.json') as json_file:
     data = json_file.read()
 jsonobj = json.loads(data)
@@ -13,9 +13,11 @@ jsonobj = json.loads(data)
 schema = {
     "type": "object",
     "properties": {
-        "state": {"type": "string", "enum": ["UP_TO_DATE"]}
+        "stoppedCount": {"type": "integer", "enum": [0]},
+        "invalidCount": {"type": "integer", "enum": [0]},
+        "disabledCount": {"type": "integer", "enum": [0]},
     },
-    "required": ["state"],
+    "required": ["stoppedCount", "invalidCount", "disabledCount"],
 }
 v = Draft201909Validator(schema)
 validate(jsonobj, schema)

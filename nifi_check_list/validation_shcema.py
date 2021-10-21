@@ -219,7 +219,10 @@ nifiValidationShcemas["MergeContent_before_Put"] = {
             "type": "object",
             "properties": {
                 "Max Bin Age": {"type": "string", "pattern": "^([3-9]\d\d *sec)|^(\d+\d{3} *sec)|(\${.+?})|(\#{.+?})"},
-                "Minimum Number of Entries": {"type": "string", "pattern": "(^[5-9]\d\d\d$)|(^[1-9]\d{3}\d+$)|(\${.+?})|(\#{.+?})"},
+                "Minimum Number of Entries": {
+                    "type": "string", 
+                    "pattern": "(^[5-9]\d\d\d$)|(^[1-9]\d{3}\d+$)|(\${.+?})|(\#{.+?})"
+                },
             },
             "required": ["Max Bin Age", "Minimum Number of Entries"]
         },
@@ -257,6 +260,18 @@ nifiValidationShcemas['versionControlInformation'] = {
     },
     "required": ["state"],
 }
+
+# ###########Процессоры должны быть включены и не должно быть нерабочих
+nifiValidationShcemas['process_group_check_status'] = {
+    "type": "object",
+    "properties": {
+        "stoppedCount": {"type": "integer", "enum": [0]},
+        "invalidCount": {"type": "integer", "enum": [0]},
+        "disabledCount": {"type": "integer", "enum": [0]},
+    },
+    "required": ["stoppedCount", "invalidCount", "disabledCount"],
+}
+
 
 for (key, value) in nifiValidationShcemas.items():
     try:
