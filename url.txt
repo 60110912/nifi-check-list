@@ -1,2 +1,0 @@
-https://nifi.devdata.lmru.tech/nifi/?processGroupId=9fce3a94-7355-19f0-8cbe-e586a886d1c2&componentIds=
-https://nifi.devdata.lmru.tech/nifi/?processGroupId=fc4da6a3-0176-1000-ffff-ffffe236d670&componentIds=

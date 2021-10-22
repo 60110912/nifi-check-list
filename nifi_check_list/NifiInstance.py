@@ -3,7 +3,7 @@ from jsonschema import validate
 from jsonschema.exceptions import ValidationError
 import requests
 from nifi_check_list.utils import utf8
-from nifi_check_list.encrypt_password import decryptSecret
+from nifi_check_list.encrypt import decryptSecret
 from dataclasses import dataclass
 from dacite import from_dict
 from nifi_check_list.validation_shcema import nifiValidationShcemas

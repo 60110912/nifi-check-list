@@ -4,39 +4,15 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
-from pathlib import Path
 import logging
 import click
 from nifi_check_list.utils import utf8
+import yaml
+from nifi_check_list.encrypt import sshHome
 
-sshHome = str(Path.home()) + "/.ssh/"
+
 log = logging.getLogger("encrypt_password")
 FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-
-
-def decryptSecret(encrypted: str) -> str:
-    """
-    Функция расшифровывает секрет:
-    Параметр:
-        encrypted - зашифвованный секрет в base46 кодировке.
-    """
-    log.debug("Загружаю имеющиеся сетрификаты с диска")
-    with open(f'{sshHome}nifi_check_private_key.pem', "rb") as key_file:
-        private_key = serialization.load_pem_private_key(
-            key_file.read(),
-            password=None,
-            backend=default_backend()
-        )
-    log.debug("Дешифрую пароль")
-    decrypted = private_key.decrypt(
-        base64.b64decode(encrypted),
-        padding.OAEP(
-            mgf=padding.MGF1(algorithm=hashes.SHA256()),
-            algorithm=hashes.SHA256(),
-            label=None
-        )
-    )
-    return utf8(decrypted)
 
 
 @click.command()
@@ -47,7 +23,12 @@ def decryptSecret(encrypted: str) -> str:
     default="ERROR",
     type=click.Choice(['DEBUG', 'INFO', 'WARNING', 'ERROR']),
     help='Log level. Default log level DEBUG')
-def main(password, logLevel):
+@click.option(
+    '--file',
+    'nifi_config',
+    required=True, help='Nifi config'
+)
+def main(password, logLevel, nifi_config):
     """
     Функция выводит зашифрованный пароль для сохранения в конфигураторе.
     Параметр:
@@ -58,7 +39,7 @@ def main(password, logLevel):
         level=logLevel,
         format=FORMAT
     )
-    log.debug("Генерирую сертификат для пароля")
+    log.info("Генерирую сертификат для пароля")
     private_key = rsa.generate_private_key(
         public_exponent=65537,
         key_size=4096,
@@ -70,7 +51,7 @@ def main(password, logLevel):
         format=serialization.PrivateFormat.PKCS8,
         encryption_algorithm=serialization.NoEncryption()
     )
-    log.debug(f"Сохраняю сертификат в папки {sshHome}")
+    log.info(f"Сохраняю сертификат в папки {sshHome}")
     with open(f'{sshHome}nifi_check_private_key.pem', 'wb') as f:
         f.write(private_pem)
 
@@ -80,7 +61,7 @@ def main(password, logLevel):
     )
     with open(f'{sshHome}nifi_check_public_key.pem', 'wb') as f:
         f.write(public_pem)
-    log.debug("Загружаю имеющиеся сетрификаты с диска")
+    log.info("Загружаю имеющиеся сетрификаты с диска")
     with open(f'{sshHome}nifi_check_private_key.pem', "rb") as key_file:
         private_key = serialization.load_pem_private_key(
             key_file.read(),
@@ -92,7 +73,7 @@ def main(password, logLevel):
             key_file.read(),
             backend=default_backend()
         )
-    log.debug("Шифрую сетификатом пароль")
+    log.info("Шифрую сетификатом пароль")
 
     encrypted = base64.b64encode(public_key.encrypt(
         password.encode('utf-8'),
@@ -102,9 +83,14 @@ def main(password, logLevel):
             label=None
         )
     ))
-    log.debug("Показываю зашифрованный пароль для пользователя")
-    print(f'{utf8(encrypted)}')
+    with open(nifi_config, 'r') as file:
+        config = yaml.load(file, yaml.SafeLoader)
+    log.debug(config)
+    config['nifi_config']['encrypPassword'] = utf8(encrypted)
+    with open(nifi_config, 'w') as file:
+        yaml.dump(config, file)
 
 
 if __name__ == "__main__":
     main()
+
