@@ -1,0 +1,14 @@
+{
+    "groupId": "fc4da6a3-0176-1000-ffff-ffffe236d670",
+    "registryId": "e08c1800-0171-1000-ffff-ffffd9c8f80f",
+    "registryName": "Registry",
+    "bucketId": "5ed2ce61-9bd0-4174-ba44-fb36fa3596f9",
+    "bucketName": "Customer Relationships",
+    "flowId": "1f3e537e-ddc7-4404-a3f8-61a428f1685f",
+    "flowName": "Kantar_rest2kafka",
+    "flowDescription": "Kantar_rest2kafka",
+    "version": 1,
+    "state": "LocalS",
+    "stateExplanation": "Local changes have been made"
+
+}

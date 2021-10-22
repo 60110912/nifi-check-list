@@ -7,10 +7,11 @@ from nifi_check_list.validate_nifi import getAllComponent, checkConsumeKafkaReco
     checkAllProcessorValidName, checkMergeContentBeforePut, checkSchemaObjects
 
 FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-log = logging.getLogger("nifi_check_list") 
+log = logging.getLogger("nifi_check_list")
+
 
 @click.command()
-@click.option('--file',  help='Validate file must be a json struct')
+@click.option('--file', required=True, help='Validate file must be a json struct')
 @click.option(
     '--log',
     default="ERROR",

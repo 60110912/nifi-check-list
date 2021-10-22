@@ -1,0 +1,139 @@
+{
+    "revision": {
+        "version": 0
+    },
+    "id": "fc4da6a3-0176-1000-ffff-ffffe236d670",
+    "uri": "https://nifi.devdata.lmru.tech:443/nifi-api/process-groups/fc4da6a3-0176-1000-ffff-ffffe236d670",
+    "position": {
+        "x": 5936.0,
+        "y": 2936.0
+    },
+    "permissions": {
+        "canRead": true,
+        "canWrite": true
+    },
+    "bulletins": [],
+    "component": {
+        "id": "fc4da6a3-0176-1000-ffff-ffffe236d670",
+        "versionedComponentId": "6ba3c9fc-856e-3fa5-a237-318cf55013e9",
+        "parentGroupId": "4ff67677-016b-1000-2900-7f12f5340e17",
+        "position": {
+            "x": 5936.0,
+            "y": 2936.0
+        },
+        "name": "Kantar_rest2kafka",
+        "comments": "",
+        "variables": {},
+        "versionControlInformation": {
+            "groupId": "fc4da6a3-0176-1000-ffff-ffffe236d670",
+            "registryId": "e08c1800-0171-1000-ffff-ffffd9c8f80f",
+            "registryName": "Registry",
+            "bucketId": "5ed2ce61-9bd0-4174-ba44-fb36fa3596f9",
+            "bucketName": "Customer Relationships",
+            "flowId": "1f3e537e-ddc7-4404-a3f8-61a428f1685f",
+            "flowName": "Kantar_rest2kafka",
+            "flowDescription": "Kantar_rest2kafka",
+            "version": 1,
+            "state": "LOCALLY_MODIFIED",
+            "stateExplanation": "Local changes have been made"
+        },
+        "parameterContext": {
+            "id": "3d675c3a-0176-1000-ffff-ffff8a5fe37f",
+            "permissions": {
+                "canRead": true,
+                "canWrite": true
+            },
+            "component": {
+                "id": "3d675c3a-0176-1000-ffff-ffff8a5fe37f",
+                "name": "kantar_context"
+            }
+        },
+        "runningCount": 23,
+        "stoppedCount": 6,
+        "invalidCount": 1,
+        "disabledCount": 1,
+        "activeRemotePortCount": 0,
+        "inactiveRemotePortCount": 0,
+        "upToDateCount": 0,
+        "locallyModifiedCount": 0,
+        "staleCount": 0,
+        "locallyModifiedAndStaleCount": 0,
+        "syncFailureCount": 0,
+        "localInputPortCount": 0,
+        "localOutputPortCount": 0,
+        "publicInputPortCount": 0,
+        "publicOutputPortCount": 0,
+        "inputPortCount": 0,
+        "outputPortCount": 0
+    },
+    "status": {
+        "id": "fc4da6a3-0176-1000-ffff-ffffe236d670",
+        "name": "Kantar_rest2kafka",
+        "statsLastRefreshed": "09:40:42 MSK",
+        "aggregateSnapshot": {
+            "id": "fc4da6a3-0176-1000-ffff-ffffe236d670",
+            "name": "Kantar_rest2kafka",
+            "connectionStatusSnapshots": [],
+            "processorStatusSnapshots": [],
+            "remoteProcessGroupStatusSnapshots": [],
+            "inputPortStatusSnapshots": [],
+            "outputPortStatusSnapshots": [],
+            "versionedFlowState": "LOCALLY_MODIFIED",
+            "flowFilesIn": 0,
+            "bytesIn": 0,
+            "input": "0 (0 bytes)",
+            "flowFilesQueued": 8,
+            "bytesQueued": 912,
+            "queued": "8 (912 bytes)",
+            "queuedCount": "8",
+            "queuedSize": "912 bytes",
+            "bytesRead": 0,
+            "read": "0 bytes",
+            "bytesWritten": 0,
+            "written": "0 bytes",
+            "flowFilesOut": 0,
+            "bytesOut": 0,
+            "output": "0 (0 bytes)",
+            "flowFilesTransferred": 0,
+            "bytesTransferred": 0,
+            "transferred": "0 (0 bytes)",
+            "bytesReceived": 0,
+            "flowFilesReceived": 0,
+            "received": "0 (0 bytes)",
+            "bytesSent": 0,
+            "flowFilesSent": 0,
+            "sent": "0 (0 bytes)",
+            "activeThreadCount": 0,
+            "terminatedThreadCount": 0
+        }
+    },
+    "runningCount": 23,
+    "stoppedCount": 6,
+    "invalidCount": 1,
+    "disabledCount": 1,
+    "activeRemotePortCount": 0,
+    "inactiveRemotePortCount": 0,
+    "versionedFlowState": "LOCALLY_MODIFIED",
+    "upToDateCount": 0,
+    "locallyModifiedCount": 0,
+    "staleCount": 0,
+    "locallyModifiedAndStaleCount": 0,
+    "syncFailureCount": 0,
+    "localInputPortCount": 0,
+    "localOutputPortCount": 0,
+    "publicInputPortCount": 0,
+    "publicOutputPortCount": 0,
+    "parameterContext": {
+        "id": "3d675c3a-0176-1000-ffff-ffff8a5fe37f",
+        "permissions": {
+            "canRead": true,
+            "canWrite": true
+        },
+        "component": {
+            "id": "3d675c3a-0176-1000-ffff-ffff8a5fe37f",
+            "name": "kantar_context"
+        }
+    },
+    "inputPortCount": 0,
+    "outputPortCount": 0
+}

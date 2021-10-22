@@ -11,8 +11,8 @@ nifiValidationShcemas['org.apache.nifi.avro.AvroReader'] = {
         "properties": {
             "type": "object",
             "properties": {
-                "schema-name": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "schema-text": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"}
+                "schema-name": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "schema-text": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"}
             },
             "required": ["schema-name", "schema-text"]
         },
@@ -46,8 +46,8 @@ nifiValidationShcemas['org.apache.nifi.json.JsonRecordSetWriter'] = {
         "properties": {
             "type": "object",
             "properties": {
-                "schema-name": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "schema-text": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
+                "schema-name": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "schema-text": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
             },
             "required": ["schema-name", "schema-text"]
         },
@@ -71,7 +71,7 @@ nifiValidationShcemas['org.apache.nifi.dbcp.DBCPConnectionPool'] = {
                 "properties": {"Database Driver Class Name": {"const": "org.postgresql.Driver"}}
             },
             "then": {
-                "properties": {"Database Connection URL": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"}}
+                "properties": {"Database Connection URL": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"}}
             }
         },
     },
@@ -97,10 +97,10 @@ nifiValidationShcemas['org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecor
         "properties": {
             "type": "object",
             "properties": {
-                "sasl.username": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "group.id": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "bootstrap.servers": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "topic": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
+                "sasl.username": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "group.id": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "bootstrap.servers": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "topic": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
                 "auto.offset.reset": {"type": "string", "enum": ['earliest']},
                 "ssl.context.service": {
                     "type": "string",
@@ -187,18 +187,18 @@ nifiValidationShcemas["org.apache.nifi.processors.aws.s3.PutS3Object"] = {
         "properties": {
             "type": "object",
             "properties": {
-                "FullControl User List": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "Owner": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "Access Key": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "Endpoint Override URL": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "canned-acl": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "Secret Key": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "Write ACL User List": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "Read ACL User List": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "Object Key": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "Bucket": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "Write Permission User List": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
-                "Read Permission User List": {"type": "string", "pattern": "(\${.*?})|(\#{.*?})"},
+                "FullControl User List": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "Owner": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "Access Key": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "Endpoint Override URL": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "canned-acl": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "Secret Key": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "Write ACL User List": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "Read ACL User List": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "Object Key": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "Bucket": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "Write Permission User List": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "Read Permission User List": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
             },
             "required": [
                 "FullControl User List",
@@ -218,8 +218,11 @@ nifiValidationShcemas["MergeContent_before_Put"] = {
         "properties": {
             "type": "object",
             "properties": {
-                "Max Bin Age": {"type": "string", "pattern": "^([3-9]\d\d sec)|^(\d+\d{3} sec)"},
-                "Minimum Number of Entries": {"type": "string", "pattern": "(^[5-9]\d\d\d$)|(^[1-9]\d{3}\d+$)"},                    
+                "Max Bin Age": {"type": "string", "pattern": "^([3-9]\d\d *sec)|^(\d+\d{3} *sec)|(\${.+?})|(\#{.+?})"},
+                "Minimum Number of Entries": {
+                    "type": "string", 
+                    "pattern": "(^[5-9]\d\d\d$)|(^[1-9]\d{3}\d+$)|(\${.+?})|(\#{.+?})"
+                },
             },
             "required": ["Max Bin Age", "Minimum Number of Entries"]
         },
@@ -248,6 +251,27 @@ nifiValidationShcemas['variables'] = {
             "kafka.group"
         ],
 }
+
+# ###########versionControlInformation Объект должен быть сахранен в объектное хранение
+nifiValidationShcemas['versionControlInformation'] = {
+    "type": "object",
+    "properties": {
+        "state": {"type": "string", "enum": ["UP_TO_DATE"]}
+    },
+    "required": ["state"],
+}
+
+# ###########Процессоры должны быть включены и не должно быть нерабочих
+nifiValidationShcemas['process_group_check_status'] = {
+    "type": "object",
+    "properties": {
+        "stoppedCount": {"type": "integer", "enum": [0]},
+        "invalidCount": {"type": "integer", "enum": [0]},
+        "disabledCount": {"type": "integer", "enum": [0]},
+    },
+    "required": ["stoppedCount", "invalidCount", "disabledCount"],
+}
+
 
 for (key, value) in nifiValidationShcemas.items():
     try:
