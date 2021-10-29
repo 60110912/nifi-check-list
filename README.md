@@ -29,3 +29,4 @@ python3 encrypt_password.py --file config_nifi.yml --password ******
 ```sh
 python3 nifi_get_data.py --id f80e9187-fc45-3e54-9207-b124432f6a62
 ```
+В результате проверки создается файл f80e9187-fc45-3e54-9207-b124432f6a62.csv с логом всех ошибок по процессу.
