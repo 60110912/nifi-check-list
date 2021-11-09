@@ -189,10 +189,9 @@ nifiValidationSchemas["org.apache.nifi.processors.aws.s3.PutS3Object"] = {
             "properties": {
                 "FullControl User List": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
                 "Owner": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
-                "Access Key": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
+                "s3-temporary-directory-multipart": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
                 "Endpoint Override URL": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
                 "canned-acl": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
-                "Secret Key": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
                 "Write ACL User List": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
                 "Read ACL User List": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
                 "Object Key": {"type": "string", "pattern": "(\${.+?})|(\#{.+?})"},
@@ -202,8 +201,8 @@ nifiValidationSchemas["org.apache.nifi.processors.aws.s3.PutS3Object"] = {
             },
             "required": [
                 "FullControl User List",
-                "Owner", "Access Key", "Endpoint Override URL",
-                "canned-acl", "Secret Key", "Write ACL User List", "Read ACL User List",
+                "Owner", "s3-temporary-directory-multipart", "Endpoint Override URL",
+                "canned-acl", "Write ACL User List", "Read ACL User List",
                 "Object Key", "Bucket", "Write Permission User List", "Read Permission User List"
             ]
         },

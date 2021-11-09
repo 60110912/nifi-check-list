@@ -9,7 +9,9 @@ from dacite import from_dict
 from nifi_check_list.validation_shcema import nifiValidationSchemas
 import logging
 import urllib3
+from nifi_check_list.utils import unload_error_json
 urllib3.disable_warnings()
+
 
 log = logging.getLogger("nifi_instance")
 
@@ -137,17 +139,17 @@ class NifiInstance:
         )
         log.info(response.status_code)
         if response.status_code == 200:
-            self._check_registry_status(response.json())
+            self._check_registry_status(response.json(), id)
             return response.json()
         else:
             log.error("Нет такой процессорной группы")
             raise ErrorIdGroup(f"Нет такой процессорной группы {id}")
 
-    def _check_registry_status(self, jsonobj: dict):
+    def _check_registry_status(self, jsonobj: dict, id):
         testName = 'Обнаружение фиксации процессорной группы в регестри'
         log.info(f'Запускаем тест "{testName}"')
         log.debug(f'{jsonobj}')
-        resource = jsonpath.jsonpath(jsonobj, '$..versionControlInformation')
+        resource = jsonpath.jsonpath(jsonobj, '$..versionControlInformation')[0]
         if isinstance(resource, bool):
             log.info(f'Тест пройден "{testName}"')
             return
@@ -156,4 +158,5 @@ class NifiInstance:
             validate(resource, nifiValidationSchemas['versionControlInformation'])
         except ValidationError as ve:
             log.error(f"key={ve} Error")
+            unload_error_json(id, jsonobj)
             raise ErrorRegistry(f'Объект имеет изменения не зафиксированный в регестри.\n{ve}')
