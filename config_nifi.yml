@@ -3,5 +3,5 @@ nifi_config:
   host: https://nifi.devdata.lmru.tech
   nifi_api: /nifi-api
   nifi_web: /nifi
-  regestry_api: /nifi-registry-api
+  registry_api: /nifi-registry-api
   username: '60110912'

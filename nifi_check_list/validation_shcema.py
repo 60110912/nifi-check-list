@@ -1,10 +1,10 @@
 from jsonschema import Draft201909Validator, exceptions
 
-nifiValidationShcemas = {}
+nifiValidationSchemas = {}
 
 # ##################ControllerServices#################
 # org.apache.nifi.avro.AvroReader
-nifiValidationShcemas['org.apache.nifi.avro.AvroReader'] = {
+nifiValidationSchemas['org.apache.nifi.avro.AvroReader'] = {
     "type": "object",
     "properties": {
         "componentType": {"type": "string", "enum": ["CONTROLLER_SERVICE"]},
@@ -21,7 +21,7 @@ nifiValidationShcemas['org.apache.nifi.avro.AvroReader'] = {
 }
 
 # org.apache.nifi.ssl.StandardSSLContextService
-nifiValidationShcemas['org.apache.nifi.ssl.StandardSSLContextService'] = {
+nifiValidationSchemas['org.apache.nifi.ssl.StandardSSLContextService'] = {
     "type": "object",
     "properties": {
         "componentType": {"type": "string", "enum": ["CONTROLLER_SERVICE"]},
@@ -39,7 +39,7 @@ nifiValidationShcemas['org.apache.nifi.ssl.StandardSSLContextService'] = {
 } 
 
 # org.apache.nifi.json.JsonRecordSetWriter
-nifiValidationShcemas['org.apache.nifi.json.JsonRecordSetWriter'] = {
+nifiValidationSchemas['org.apache.nifi.json.JsonRecordSetWriter'] = {
     "type": "object",
     "properties": {
         "componentType": {"type": "string", "enum": ["CONTROLLER_SERVICE"]},
@@ -56,7 +56,7 @@ nifiValidationShcemas['org.apache.nifi.json.JsonRecordSetWriter'] = {
 }
 
 # org.apache.nifi.dbcp.DBCPConnectionPool
-nifiValidationShcemas['org.apache.nifi.dbcp.DBCPConnectionPool'] = {
+nifiValidationSchemas['org.apache.nifi.dbcp.DBCPConnectionPool'] = {
     "type": "object",
     "properties": {
         "componentType": {"type": "string", "enum": ["CONTROLLER_SERVICE"]},
@@ -80,7 +80,7 @@ nifiValidationShcemas['org.apache.nifi.dbcp.DBCPConnectionPool'] = {
 
 #  ############### Processors###################
 # All ENABLED
-nifiValidationShcemas['processors_enabled'] = {
+nifiValidationSchemas['processors_enabled'] = {
     "type": "object",
     "properties": {
         "scheduledState": {"type": "string", "enum": ["ENABLED"]}
@@ -89,7 +89,7 @@ nifiValidationShcemas['processors_enabled'] = {
 }
 
 # org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecord_2_0
-nifiValidationShcemas['org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecord_2_0'] = {
+nifiValidationSchemas['org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecord_2_0'] = {
     "type": "object",
     "properties": {
         "scheduledState": {"type": "string", "enum": ["ENABLED"]},
@@ -127,7 +127,7 @@ nifiValidationShcemas['org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecor
     "required": ["scheduledState", "concurrentlySchedulableTaskCount"] 
 }
 # org.apache.nifi.processors.standard.PutSQL
-nifiValidationShcemas["org.apache.nifi.processors.standard.PutSQL"] = {
+nifiValidationSchemas["org.apache.nifi.processors.standard.PutSQL"] = {
     "type": "object",
     "properties": {
         "scheduledState": {"type": "string", "enum": ["ENABLED"]},
@@ -148,7 +148,7 @@ nifiValidationShcemas["org.apache.nifi.processors.standard.PutSQL"] = {
 
 # org.apache.nifi.processors.script.ExecuteScript
 
-nifiValidationShcemas["org.apache.nifi.processors.script.ExecuteScript"] = {
+nifiValidationSchemas["org.apache.nifi.processors.script.ExecuteScript"] = {
     "type": "object",
     "properties": {
         "scheduledState": {"type": "string", "enum": ["ENABLED"]},
@@ -166,7 +166,7 @@ nifiValidationShcemas["org.apache.nifi.processors.script.ExecuteScript"] = {
 }
 
 # org.apache.nifi.processors.standard.MergeContent
-nifiValidationShcemas["org.apache.nifi.processors.standard.MergeContent"] = {
+nifiValidationSchemas["org.apache.nifi.processors.standard.MergeContent"] = {
     "type": "object",
     "properties": {
         "scheduledState": {"type": "string", "enum": ["ENABLED"]},
@@ -180,7 +180,7 @@ nifiValidationShcemas["org.apache.nifi.processors.standard.MergeContent"] = {
 }
 
 # org.apache.nifi.processors.aws.s3.PutS3Object
-nifiValidationShcemas["org.apache.nifi.processors.aws.s3.PutS3Object"] = {
+nifiValidationSchemas["org.apache.nifi.processors.aws.s3.PutS3Object"] = {
     "type": "object",
     "properties": {
         "scheduledState": {"type": "string", "enum": ["ENABLED"]},
@@ -211,7 +211,7 @@ nifiValidationShcemas["org.apache.nifi.processors.aws.s3.PutS3Object"] = {
     "required": ["scheduledState"]
 }
 # Individual validation
-nifiValidationShcemas["MergeContent_before_Put"] = {
+nifiValidationSchemas["MergeContent_before_Put"] = {
     "type": "object",
     "properties": {
         "scheduledState": {"type": "string", "enum": ["ENABLED"]},
@@ -231,7 +231,7 @@ nifiValidationShcemas["MergeContent_before_Put"] = {
 }
 
 # ###########variables
-nifiValidationShcemas['variables'] = {
+nifiValidationSchemas['variables'] = {
         "type": "object",
         "properties": {
             "kafka.schema.registry": {"type": "string"},
@@ -253,7 +253,7 @@ nifiValidationShcemas['variables'] = {
 }
 
 # ###########versionControlInformation Объект должен быть сахранен в объектное хранение
-nifiValidationShcemas['versionControlInformation'] = {
+nifiValidationSchemas['versionControlInformation'] = {
     "type": "object",
     "properties": {
         "state": {"type": "string", "enum": ["UP_TO_DATE"]}
@@ -262,7 +262,7 @@ nifiValidationShcemas['versionControlInformation'] = {
 }
 
 # ###########Процессоры должны быть включены и не должно быть нерабочих
-nifiValidationShcemas['process_group_check_status'] = {
+nifiValidationSchemas['process_group_check_status'] = {
     "type": "object",
     "properties": {
         "stoppedCount": {"type": "integer", "enum": [0]},
@@ -273,7 +273,7 @@ nifiValidationShcemas['process_group_check_status'] = {
 }
 
 
-for (key, value) in nifiValidationShcemas.items():
+for (key, value) in nifiValidationSchemas.items():
     try:
         Draft201909Validator(value)
     except exceptions.SchemaError as ve:
