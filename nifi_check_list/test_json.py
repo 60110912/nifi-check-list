@@ -1,7 +1,7 @@
 
 import json
 from jsonschema import validate, Draft201909Validator
-# from validation_shcema import nifiValidationShcemas
+# from validation_shcema import nifiValidationSchemas
 
 
 # Тест
@@ -23,4 +23,4 @@ v = Draft201909Validator(schema)
 validate(jsonobj, schema)
 
 # print('validate from schema')
-# validate(jsonobj, nifiValidationShcemas[testSchema])
+# validate(jsonobj, nifiValidationSchemas[testSchema])

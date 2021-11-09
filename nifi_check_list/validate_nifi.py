@@ -1,9 +1,9 @@
 import re
 import jsonpath
 from jsonschema import validate, exceptions
-from nifi_check_list.validation_shcema import nifiValidationShcemas
+from nifi_check_list.validation_shcema import nifiValidationSchemas
 import pandas as pd
-from nifi_check_list.NifiMyltyGraph import NifiMultyGraph
+from nifi_check_list.NifiMultyGraph import NifiMultyGraph
 import logging
 
 log = logging.getLogger("validate_nifi")
@@ -34,7 +34,7 @@ def checkAllProcessorsIsEnables(jsonobj) -> pd.DataFrame:
     result = pd.DataFrame()
     for item in processors:
         try:
-            validate(item, nifiValidationShcemas['processors_enabled'])
+            validate(item, nifiValidationSchemas['processors_enabled'])
             log.info("Record #{}: OK".format(item['name']))
         except exceptions.ValidationError as ve:
             log.info("Record #{}: ERROR".format(item['name']))
@@ -125,7 +125,7 @@ def checkMergeContentBeforePut(g: NifiMultyGraph, jsonobj) -> pd.DataFrame:
         try:
             identifier = item['identifier']
             log.info(f'Для идентификатора {identifier} проверяем заполнение параметров')
-            validate(item, nifiValidationShcemas['MergeContent_before_Put'])
+            validate(item, nifiValidationSchemas['MergeContent_before_Put'])
             log.info(f'Для идентификатора {identifier} параметры нормальные')
         except exceptions.ValidationError as ve:
             temp_result = pd.DataFrame(
@@ -157,8 +157,8 @@ def checkSchemaObjects(jsonobj) -> pd.DataFrame:
         try:
             (identifier, objectType) = (item['identifier'], item['type'])
             log.info(f'Для объекта {identifier} применяем схему валидации {objectType}')
-            if item['type'] in nifiValidationShcemas:
-                validate(item, nifiValidationShcemas[objectType])
+            if item['type'] in nifiValidationSchemas:
+                validate(item, nifiValidationSchemas[objectType])
                 log.info("Record #{}: OK".format(item['name']))
             else:
                 temp_result = pd.DataFrame(
@@ -249,7 +249,7 @@ def checkAllProcessorsIsNormal(jsonobj) -> pd.DataFrame:
     item = jsonobj
     log.info(f'Проверяем пункт "{testName}"')
     try:
-        validate(jsonobj, nifiValidationShcemas['process_group_check_status'])
+        validate(jsonobj, nifiValidationSchemas['process_group_check_status'])
         log.info("Record #{}: OK".format(item['id']))
     except exceptions.ValidationError as ve:
         log.info("Record #{}: ERROR".format(item['id']))

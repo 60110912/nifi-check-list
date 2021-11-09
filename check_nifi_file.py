@@ -1,7 +1,7 @@
 import click
 import json
 import pandas as pd
-from nifi_check_list.NifiMyltyGraph import NifiMultyGraph
+from nifi_check_list.NifiMultyGraph import NifiMultyGraph
 import logging
 from nifi_check_list.validate_nifi import getAllComponent, checkConsumeKafkaRecor, checkAllProcessorsIsEnables, \
     checkAllProcessorValidName, checkMergeContentBeforePut, checkSchemaObjects

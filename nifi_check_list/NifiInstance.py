@@ -6,10 +6,12 @@ from nifi_check_list.utils import utf8
 from nifi_check_list.encrypt import decryptSecret
 from dataclasses import dataclass
 from dacite import from_dict
-from nifi_check_list.validation_shcema import nifiValidationShcemas
+from nifi_check_list.validation_shcema import nifiValidationSchemas
 import logging
 import urllib3
+from nifi_check_list.utils import unload_error_json
 urllib3.disable_warnings()
+
 
 log = logging.getLogger("nifi_instance")
 
@@ -24,9 +26,7 @@ class ConfigNifi:
     access_token: str
     password: str
     nifi_api: str
-    regestry_api: str
-    nifi_web: str
-    regestry_api: str
+    registry_api: str
     nifi_web: str
 
 
@@ -42,7 +42,7 @@ class ErrorIdGroup(Exception):
         self.message = message
 
 
-class ErrorRegestry(Exception):
+class ErrorRegistry(Exception):
     def __init__(self, message):
         # Call the base class constructor with the parameters it needs
         self.message = message
@@ -65,12 +65,12 @@ class NifiInstance:
             "username": {"type": "string"},
             "encrypPassword": {"type": "string"},
             "nifi_api": {"type": "string"},
-            "regestry_api": {"type": "string"},
+            "registry_api": {"type": "string"},
             "nifi_web": {"type": "string"}
             },
         "required": [
             "host", "username",
-            "encrypPassword", "nifi_api", "regestry_api", "nifi_web"
+            "encrypPassword", "nifi_api", "registry_api", "nifi_web"
         ]
     }
 
@@ -139,23 +139,24 @@ class NifiInstance:
         )
         log.info(response.status_code)
         if response.status_code == 200:
-            self._scheck_regestry_status(response.json())
+            self._check_registry_status(response.json(), id)
             return response.json()
         else:
             log.error("Нет такой процессорной группы")
             raise ErrorIdGroup(f"Нет такой процессорной группы {id}")
 
-    def _scheck_regestry_status(self, jsonobj: dict):
+    def _check_registry_status(self, jsonobj: dict, id):
         testName = 'Обнаружение фиксации процессорной группы в регестри'
         log.info(f'Запускаем тест "{testName}"')
         log.debug(f'{jsonobj}')
-        resource = jsonpath.jsonpath(jsonobj, '$..versionControlInformation')
+        resource = jsonpath.jsonpath(jsonobj, '$..versionControlInformation')[0]
         if isinstance(resource, bool):
             log.info(f'Тест пройден "{testName}"')
             return
         log.info(f"Объект валидации {resource}")
         try:
-            validate(resource, nifiValidationShcemas['versionControlInformation'])
+            validate(resource, nifiValidationSchemas['versionControlInformation'])
         except ValidationError as ve:
             log.error(f"key={ve} Error")
-            raise ErrorRegestry(f'Объект имеет изменения не зафиксированный в регестри.\n{ve}')
+            unload_error_json(id, jsonobj)
+            raise ErrorRegistry(f'Объект имеет изменения не зафиксированный в регестри.\n{ve}')
