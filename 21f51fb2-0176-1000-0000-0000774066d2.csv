@@ -1,0 +1,8 @@
+Объект имеет изменения не зафиксированный в регестри.
+'LOCALLY_MODIFIED' is not one of ['UP_TO_DATE']
+
+Failed validating 'enum' in schema['properties']['state']:
+    {'enum': ['UP_TO_DATE'], 'type': 'string'}
+
+On instance['state']:
+    'LOCALLY_MODIFIED'

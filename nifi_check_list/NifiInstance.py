@@ -149,13 +149,13 @@ class NifiInstance:
         testName = 'Обнаружение фиксации процессорной группы в регестри'
         log.info(f'Запускаем тест "{testName}"')
         log.debug(f'{jsonobj}')
-        resource = jsonpath.jsonpath(jsonobj, '$..versionControlInformation')[0]
+        resource = jsonpath.jsonpath(jsonobj, '$..versionControlInformation')
         if isinstance(resource, bool):
             log.info(f'Тест пройден "{testName}"')
             return
         log.info(f"Объект валидации {resource}")
         try:
-            validate(resource, nifiValidationSchemas['versionControlInformation'])
+            validate(resource[0], nifiValidationSchemas['versionControlInformation'])
         except ValidationError as ve:
             log.error(f"key={ve} Error")
             unload_error_json(id, jsonobj)

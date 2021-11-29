@@ -1,0 +1,12 @@
+Identifier	name	componentType	type	Tests name	Result	Message
+266c3a9f-e7a4-1a13-932d-b6672b6a4ecf	Process Group	Process Group	Process Group	Включены все процессоры и нет неактивных	Error	9 is not one of [0] enum [0]
+ca5c6a79-52d1-319e-8f10-12d51495f754	MAS_Convert_To_JSON	PROCESSOR	org.apache.nifi.processors.standard.ConvertRecord	Валидация стандартов оформления ресурсов	Warning	Для ресурса нет схемы валидации
+748b61bc-db1a-30ba-82cc-abcb7191e9df	M5N_ConsumeKafkaRecord_2_0	PROCESSOR	org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecord_2_0	Префикс системы	Error	Название процессора начинается не верно
+9617bded-9b73-3380-a064-cc1a6b638b8d	M5N_ConvertRecord	PROCESSOR	org.apache.nifi.processors.standard.ConvertRecord	Префикс системы	Error	Название процессора начинается не верно
+9617bded-9b73-3380-a064-cc1a6b638b8d	M5N_ConvertRecord	PROCESSOR	org.apache.nifi.processors.standard.ConvertRecord	Валидация стандартов оформления ресурсов	Warning	Для ресурса нет схемы валидации
+931d290b-5dc0-3cc4-b31d-478fcaed0743	MAS_SplitJson	PROCESSOR	org.apache.nifi.processors.standard.SplitJson	Валидация стандартов оформления ресурсов	Warning	Для ресурса нет схемы валидации
+5f379c1f-1172-3f83-927f-3e8c637cfd45	MAS_EvaluateJsonPath	PROCESSOR	org.apache.nifi.processors.standard.EvaluateJsonPath	Валидация стандартов оформления ресурсов	Warning	Для ресурса нет схемы валидации
+3fc2c814-6134-338e-b003-737e217f0db0	M5N_UpdateRecord	PROCESSOR	org.apache.nifi.processors.standard.UpdateRecord	Префикс системы	Error	Название процессора начинается не верно
+3fc2c814-6134-338e-b003-737e217f0db0	M5N_UpdateRecord	PROCESSOR	org.apache.nifi.processors.standard.UpdateRecord	Валидация стандартов оформления ресурсов	Warning	Для ресурса нет схемы валидации
+a871be11-46e8-3f7e-bbd0-30c7a95c1c66	AvroRecordSetWriter_from_Kafka	CONTROLLER_SERVICE	org.apache.nifi.avro.AvroRecordSetWriter	Валидация стандартов оформления ресурсов	Warning	Для ресурса нет схемы валидации
+3b2d3a32-888a-3ab2-8dcb-d1f452a06d87	ConfluentSchemaRegistry_from_Kafka	CONTROLLER_SERVICE	org.apache.nifi.confluent.schemaregistry.ConfluentSchemaRegistry	Валидация стандартов оформления ресурсов	Warning	Для ресурса нет схемы валидации
