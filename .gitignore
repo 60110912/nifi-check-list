@@ -3,6 +3,6 @@
 .vscode
 *__pycache__
 Pipfile
-.csv
+*.csv
 Pipfile.lock
 *.pem
